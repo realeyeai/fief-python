@@ -1,5 +1,6 @@
 import contextlib
 import json
+import ssl
 import uuid
 from collections.abc import Mapping
 from enum import Enum
@@ -7,13 +8,13 @@ from typing import Any, Optional, TypedDict, Union
 from urllib.parse import urlencode, urlsplit, urlunsplit
 
 import httpx
-from httpx._types import CertTypes, VerifyTypes
+from httpx._types import CertTypes
 from jwcrypto import jwk, jwt
 
 from fief_client.crypto import is_valid_hash
 
 HTTPXClient = Union[httpx.Client, httpx.AsyncClient]
-
+VerifyTypes = Union[str, bool, ssl.SSLContext]
 
 class FiefACR(str, Enum):
     """
