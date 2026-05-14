@@ -261,7 +261,7 @@ class TestAuthCallback:
         self, fief_client: Fief, mock_api_requests: respx.MockRouter
     ):
         token_route = mock_api_requests.post("/token")
-        token_route.return_value = Response(400, json={"detail": "error"})
+        token_route.return_value = Response(400, json={"detail":"error"})
 
         with pytest.raises(FiefRequestError) as excinfo:
             fief_client.auth_callback(
@@ -270,7 +270,7 @@ class TestAuthCallback:
                 code_verifier="CODE_VERIFIER",
             )
         assert excinfo.value.status_code == 400
-        assert excinfo.value.detail == '{"detail": "error"}'
+        assert excinfo.value.detail == '{"detail":"error"}'
 
     def test_valid_response(
         self,
@@ -312,7 +312,7 @@ class TestAuthCallback:
         self, fief_async_client: FiefAsync, mock_api_requests: respx.MockRouter
     ):
         token_route = mock_api_requests.post("/token")
-        token_route.return_value = Response(400, json={"detail": "error"})
+        token_route.return_value = Response(400, json={"detail":"error"})
 
         with pytest.raises(FiefRequestError) as excinfo:
             await fief_async_client.auth_callback(
@@ -321,7 +321,7 @@ class TestAuthCallback:
                 code_verifier="CODE_VERIFIER",
             )
         assert excinfo.value.status_code == 400
-        assert excinfo.value.detail == '{"detail": "error"}'
+        assert excinfo.value.detail == '{"detail":"error"}'
 
     @pytest.mark.asyncio
     async def test_valid_response_async(
@@ -433,14 +433,14 @@ class TestAuthRefreshToken:
         self, fief_client: Fief, mock_api_requests: respx.MockRouter
     ):
         token_route = mock_api_requests.post("/token")
-        token_route.return_value = Response(400, json={"detail": "error"})
+        token_route.return_value = Response(400, json={"detail":"error"})
 
         with pytest.raises(FiefRequestError) as excinfo:
             fief_client.auth_refresh_token(
                 "REFRESH_TOKEN", scope=["openid", "offline_access"]
             )
         assert excinfo.value.status_code == 400
-        assert excinfo.value.detail == '{"detail": "error"}'
+        assert excinfo.value.detail == '{"detail":"error"}'
 
     def test_valid_response(
         self,
@@ -482,14 +482,14 @@ class TestAuthRefreshToken:
         self, fief_async_client: FiefAsync, mock_api_requests: respx.MockRouter
     ):
         token_route = mock_api_requests.post("/token")
-        token_route.return_value = Response(400, json={"detail": "error"})
+        token_route.return_value = Response(400, json={"detail":"error"})
 
         with pytest.raises(FiefRequestError) as excinfo:
             await fief_async_client.auth_refresh_token(
                 "REFRESH_TOKEN", scope=["openid", "offline_access"]
             )
         assert excinfo.value.status_code == 400
-        assert excinfo.value.detail == '{"detail": "error"}'
+        assert excinfo.value.detail == '{"detail":"error"}'
 
     @pytest.mark.asyncio
     async def test_valid_response_async(
@@ -742,12 +742,12 @@ class TestUserinfo:
         self, fief_client: Fief, mock_api_requests: respx.MockRouter
     ):
         token_route = mock_api_requests.get("/userinfo")
-        token_route.return_value = Response(400, json={"detail": "error"})
+        token_route.return_value = Response(400, json={"detail":"error"})
 
         with pytest.raises(FiefRequestError) as excinfo:
             fief_client.userinfo("ACCESS_TOKEN")
         assert excinfo.value.status_code == 400
-        assert excinfo.value.detail == '{"detail": "error"}'
+        assert excinfo.value.detail == '{"detail":"error"}'
 
     def test_valid_response(
         self, fief_client: Fief, mock_api_requests: respx.MockRouter, user_id: str
@@ -764,12 +764,12 @@ class TestUserinfo:
         self, fief_async_client: FiefAsync, mock_api_requests: respx.MockRouter
     ):
         token_route = mock_api_requests.get("/userinfo")
-        token_route.return_value = Response(400, json={"detail": "error"})
+        token_route.return_value = Response(400, json={"detail":"error"})
 
         with pytest.raises(FiefRequestError) as excinfo:
             await fief_async_client.userinfo("ACCESS_TOKEN")
         assert excinfo.value.status_code == 400
-        assert excinfo.value.detail == '{"detail": "error"}'
+        assert excinfo.value.detail == '{"detail":"error"}'
 
     @pytest.mark.asyncio
     async def test_valid_response_async(
@@ -809,13 +809,13 @@ class TestUpdateUserMethods:
         mock_api_requests: respx.MockRouter,
     ):
         route = mock_api_requests.route(path=endpoint)
-        route.return_value = Response(400, json={"detail": "error"})
+        route.return_value = Response(400, json={"detail":"error"})
 
         with pytest.raises(FiefRequestError) as excinfo:
             method = getattr(fief_client, method_name)
             method(*args)
         assert excinfo.value.status_code == 400
-        assert excinfo.value.detail == '{"detail": "error"}'
+        assert excinfo.value.detail == '{"detail":"error"}'
 
     def test_valid_response(
         self,
@@ -844,13 +844,13 @@ class TestUpdateUserMethods:
         mock_api_requests: respx.MockRouter,
     ):
         route = mock_api_requests.route(path=endpoint)
-        route.return_value = Response(400, json={"detail": "error"})
+        route.return_value = Response(400, json={"detail":"error"})
 
         with pytest.raises(FiefRequestError) as excinfo:
             method = getattr(fief_async_client, method_name)
             await method(*args)
         assert excinfo.value.status_code == 400
-        assert excinfo.value.detail == '{"detail": "error"}'
+        assert excinfo.value.detail == '{"detail":"error"}'
 
     @pytest.mark.asyncio
     async def test_valid_response_async(
